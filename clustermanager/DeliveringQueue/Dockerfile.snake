@@ -1,0 +1,18 @@
+FROM python:3.9-slim
+
+# Stable base image for Snake runtime (dependencies + static assets only)
+WORKDIR /app
+
+# Install Python dependencies (cached as long as requirements don't change)
+COPY include/base-requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+# Copy static game assets only; user scripts are mounted at runtime
+COPY Game-Vault/SnakeGame.py ./
+COPY launch.sh ./
+RUN chmod +x launch.sh
+
+# Default command; expects env vars set and user script mounted to /app/ai.py
+ENV GAME_NAME=snake
+CMD ["./launch.sh"]
+

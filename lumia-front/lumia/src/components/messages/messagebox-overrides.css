@@ -1,0 +1,55 @@
+.dark .rce-mbox-title {
+    color: white;
+}
+
+.dark .rce-mbox-text {
+    color: white;
+}
+
+.dark .rce-mbox-time {
+    color: #9CA3AF; /* Tailwind's gray-400 */
+}
+
+.dark .rce-mbox {
+    background-color: #1F2937; /* Tailwind's gray-800 */
+}
+
+.dark .rce-mbox-left-notch, .dark .rce-mbox-right-notch {
+    fill: #1F2937; /* Tailwind's gray-800 */
+}
+/* Chat popup animation */
+@keyframes chatPopupOpen {
+    from {
+        opacity: 0;
+        transform: scale(0) translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes chatPopupClose {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0) translateY(16px);
+    }
+}
+
+/* Chat popup container - open state */
+.chat-popup-open {
+    animation: chatPopupOpen 400ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    transform-origin: bottom right;
+    pointer-events: auto;
+}
+
+/* Chat popup container - closed state */
+.chat-popup-closed {
+    animation: chatPopupClose 400ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    transform-origin: bottom right;
+    pointer-events: none;
+}

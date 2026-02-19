@@ -1,0 +1,199 @@
+{
+    "timestamp": "2025-04-25 17:52:39",
+    "gameType": "image",
+    "userId": "NA",
+    "gameId": 1,
+    "message": "win",
+    "gameStates": [
+        {
+            "timestamp": "2025-04-25 17:50:11",
+            "itemType": "system",
+            "logType": "INFO",
+            "message": "20 images loaded for evaluation."
+        },
+        {
+            "timestamp": "2025-04-25 17:50:11",
+            "itemType": "system",
+            "logType": "INFO",
+            "message": "Game Manager waiting for a client..."
+        },
+        {
+            "timestamp": "2025-04-25 17:52:32",
+            "itemType": "system",
+            "logType": "INFO",
+            "message": "Client connected."
+        },
+        {
+            "timestamp": "2025-04-25 17:52:32",
+            "itemType": "response",
+            "AIrespons": 1,
+            "expected": "dog",
+            "correct": true,
+            "score": 1
+        },
+        {
+            "timestamp": "2025-04-25 17:52:33",
+            "itemType": "response",
+            "AIrespons": 0,
+            "expected": "cat",
+            "correct": true,
+            "score": 2
+        },
+        {
+            "timestamp": "2025-04-25 17:52:33",
+            "itemType": "response",
+            "AIrespons": 0,
+            "expected": "cat",
+            "correct": true,
+            "score": 3
+        },
+        {
+            "timestamp": "2025-04-25 17:52:33",
+            "itemType": "response",
+            "AIrespons": 1,
+            "expected": "dog",
+            "correct": true,
+            "score": 4
+        },
+        {
+            "timestamp": "2025-04-25 17:52:34",
+            "itemType": "response",
+            "AIrespons": 0,
+            "expected": "cat",
+            "correct": true,
+            "score": 5
+        },
+        {
+            "timestamp": "2025-04-25 17:52:34",
+            "itemType": "response",
+            "AIrespons": 0,
+            "expected": "cat",
+            "correct": true,
+            "score": 6
+        },
+        {
+            "timestamp": "2025-04-25 17:52:34",
+            "itemType": "response",
+            "AIrespons": 1,
+            "expected": "dog",
+            "correct": true,
+            "score": 7
+        },
+        {
+            "timestamp": "2025-04-25 17:52:35",
+            "itemType": "response",
+            "AIrespons": 0,
+            "expected": "cat",
+            "correct": true,
+            "score": 8
+        },
+        {
+            "timestamp": "2025-04-25 17:52:35",
+            "itemType": "response",
+            "AIrespons": 0,
+            "expected": "cat",
+            "correct": true,
+            "score": 9
+        },
+        {
+            "timestamp": "2025-04-25 17:52:35",
+            "itemType": "response",
+            "AIrespons": 0,
+            "expected": "cat",
+            "correct": true,
+            "score": 10
+        },
+        {
+            "timestamp": "2025-04-25 17:52:36",
+            "itemType": "response",
+            "AIrespons": 1,
+            "expected": "dog",
+            "correct": true,
+            "score": 11
+        },
+        {
+            "timestamp": "2025-04-25 17:52:36",
+            "itemType": "response",
+            "AIrespons": 1,
+            "expected": "dog",
+            "correct": true,
+            "score": 12
+        },
+        {
+            "timestamp": "2025-04-25 17:52:36",
+            "itemType": "response",
+            "AIrespons": 0,
+            "expected": "cat",
+            "correct": true,
+            "score": 13
+        },
+        {
+            "timestamp": "2025-04-25 17:52:36",
+            "itemType": "response",
+            "AIrespons": 0,
+            "expected": "cat",
+            "correct": true,
+            "score": 14
+        },
+        {
+            "timestamp": "2025-04-25 17:52:37",
+            "itemType": "response",
+            "AIrespons": 1,
+            "expected": "dog",
+            "correct": true,
+            "score": 15
+        },
+        {
+            "timestamp": "2025-04-25 17:52:37",
+            "itemType": "response",
+            "AIrespons": 0,
+            "expected": "cat",
+            "correct": true,
+            "score": 16
+        },
+        {
+            "timestamp": "2025-04-25 17:52:37",
+            "itemType": "response",
+            "AIrespons": 0,
+            "expected": "cat",
+            "correct": true,
+            "score": 17
+        },
+        {
+            "timestamp": "2025-04-25 17:52:38",
+            "itemType": "response",
+            "AIrespons": 1,
+            "expected": "dog",
+            "correct": true,
+            "score": 18
+        },
+        {
+            "timestamp": "2025-04-25 17:52:38",
+            "itemType": "response",
+            "AIrespons": 0,
+            "expected": "cat",
+            "correct": true,
+            "score": 19
+        },
+        {
+            "timestamp": "2025-04-25 17:52:38",
+            "itemType": "response",
+            "AIrespons": 0,
+            "expected": "dog",
+            "correct": false,
+            "score": 19
+        },
+        {
+            "timestamp": "2025-04-25 17:52:39",
+            "itemType": "system",
+            "logType": "INFO",
+            "message": "Game over."
+        },
+        {
+            "timestamp": "2025-04-25 17:52:39",
+            "itemType": "system",
+            "logType": "INFO",
+            "message": "Sockets closed properly. Server shutdown complete."
+        }
+    ]
+}

@@ -1,0 +1,202 @@
+/* existing dark rules */
+.dark .rce-citem-body--bottom-title {
+    color: white;
+}
+
+.dark .rce-citem-body--top-title {
+    color: white;
+}
+
+.dark .rce-citem-body--top-time {
+    color: #9CA3AF; /* Tailwind's gray-400 */
+}
+
+.dark .rce-citem {
+    background-color: #1F2937; /* Tailwind's gray-800 */
+}
+
+/* own message background in light mode (a bit darker than white) */
+.own-message .rce-citem {
+    background-color: #ededef; /* Tailwind's gray-100 */
+}
+
+/* text color adjustments for readability on the slightly darker background */
+.own-message .rce-citem-body--bottom-title,
+.own-message .rce-citem-body--top-title {
+    color: #111827; /* Tailwind's gray-900 */
+}
+
+/* own message background in dark mode (20% lighter than their message) */
+.dark .own-message .rce-citem {
+    background: linear-gradient(to bottom right, #1a1a2e, #3d2580);
+}
+
+.dark .their-message .rce-citem {
+    background: linear-gradient(to bottom right, #010116, #180c50);
+}
+
+/* text color adjustments for dark-mode own messages */
+.dark .own-message .rce-citem-body--bottom-title,
+.dark .own-message .rce-citem-body--top-title {
+    color: #F9FAFB; /* Tailwind's gray-50/white-ish */
+}
+
+/* keep default layout for non-own messages */
+.their-message .rce-citem {
+    flex-direction: row;
+}
+
+/* remove previous positioning/row-reverse rules (ensure avatar/name stay in default position) */
+
+/* message separator between items */
+.messages-list > * .message-separator {
+    height: 1px;
+    background-color: #E5E7EB; /* tailwind gray-200 */
+    margin: 4px 0;
+}
+
+/* dark mode separator color */
+.dark .messages-list > * .message-separator {
+    background-color: #4B5563; /* tailwind gray-600 */
+}
+
+/* hide separator for the last rendered message so trailing line doesn't show */
+.messages-list > *:last-child .message-separator {
+    display: none;
+}
+
+/* ensure separator is visually subtle on small screens */
+.message-separator {
+    width: 100%;
+    opacity: 0.9;
+}
+
+/* Ensure both left and right headers have exactly the same computed height
+   including padding; provide a stable layout for header buttons so they don't get squished. */
+.messages-header {
+    height: 64px;                 /* fixed height for both headers */
+    min-height: 64px;             /* minimum height for both headers */
+    box-sizing: border-box;       /* include padding/border in height */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.5rem;            /* match px-2 */
+    border-bottom: 1px solid rgba(229, 231, 235, 1);
+    line-height: 1;
+    overflow: visible;
+}
+
+/* dark mode border override */
+.dark .messages-header {
+    border-bottom-color: rgba(55, 65, 81, 1);
+}
+
+/* Title should not add extra height */
+.messages-header h3 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;              /* match header height */
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.95rem;
+}
+
+/* Actions container must match header height so buttons don't stretch/squish */
+.header-actions {
+    display: flex;
+    gap: 0.5rem; /* 8px */
+    align-items: center;
+    height: 100%;
+    margin: 0;
+}
+
+/* Make header buttons a consistent size */
+.header-actions button,
+.messages-header > button,
+.messages-header button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;              /* stable clickable area */
+    min-height: 40px;
+    padding: 6px 10px;
+    line-height: 1;
+    border: 0;
+    cursor: pointer;
+}
+
+/* badge inside button should not change button height */
+.header-actions .inline-flex.items-center.justify-center {
+    height: 20px;
+    padding: 0 6px;
+    font-size: 12px;
+}
+
+/* small screens */
+@media (max-width: 640px) {
+    .messages-header { height: 56px; min-height: 56px; }
+    .header-actions button { height: 36px; min-height: 36px; padding: 6px 8px; }
+}
+
+/* ensure message items are not treated as clickable */
+.messages-list .rce-citem,
+.message-item .rce-citem,
+.rce-citem-wrapper {
+    cursor: default !important;
+}
+
+/* keep buttons/links inside items interactive */
+.rce-citem a,
+.rce-citem button {
+    cursor: pointer !important;
+}
+
+/* relative time badge for each message (top-right) */
+.message-item {
+    position: relative;
+}
+
+.message-time {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    font-size: 0.72rem;
+    color: #6B7280; /* gray-500 */
+    pointer-events: none;
+}
+
+/* dark mode time color */
+.dark .message-time {
+    color: #9CA3AF; /* gray-400 */
+}
+
+/* Show full message content instead of truncating with ellipsis */
+.rce-citem-body--bottom-title {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    max-height: none !important;
+    line-height: 1.5 !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+}
+
+/* Make message component height adaptive to content */
+.rce-citem {
+    min-height: auto !important;
+    height: auto !important;
+}
+
+.rce-citem-body {
+    height: auto !important;
+    min-height: auto !important;
+}
+
+/* Show formatted timestamp in top-time position */
+.rce-citem-body--top-time {
+    display: block !important;
+}
+

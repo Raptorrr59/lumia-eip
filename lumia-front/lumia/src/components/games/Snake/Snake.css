@@ -1,0 +1,429 @@
+.snake-board {
+    position: relative;
+    display: grid;
+    grid-template-rows: repeat(10, 40px);
+    grid-template-columns: repeat(10, 40px);
+    gap: 2px;
+    background-color: #1b8849;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 15px 0;
+}
+
+.snake-cell {
+    width: 40px; /* Adjust width for better visibility */
+    height: 40px; /* Adjust height for better visibility */
+    background-color: #2ecc71;
+    border-radius: 4px;
+    transition: background-color 0.1s;
+}
+
+.food {
+    background-color: #2ecc71;
+    background-image: url('../../../assets/snake-food.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.snake {
+    background-color: #2ecc71;
+    border-radius: 8px;
+    background-image: url('../../../assets/snake-body.png');
+    background-size: cover;
+}
+
+.head {
+    background-color: #2ecc71;
+    border-radius: 8px;
+    background-image: url('../../../assets/snake-head.png');
+    background-size: cover;
+}
+
+/* Directions de la tête du serpent */
+.head-up {
+    transform: rotate(0deg) !important;
+}
+
+.head-right {
+    transform: rotate(90deg) !important;
+}
+
+.head-down {
+    transform: rotate(180deg) !important;
+}
+
+.head-left {
+    transform: rotate(270deg) !important;
+}
+
+/* Style pour la queue du serpent */
+.tail {
+    background-color: #2ecc71;
+    border-radius: 8px;
+    background-image: url('../../../assets/snake-tail.png');
+    background-size: cover;
+}
+
+/* Directions de la queue du serpent */
+.tail-up {
+    transform: rotate(180deg) !important;
+}
+
+.tail-right {
+    transform: rotate(270deg) !important;
+}
+
+.tail-down {
+    transform: rotate(0deg) !important;
+}
+
+.tail-left {
+    transform: rotate(90deg) !important;
+}
+
+/* Styles pour les segments droits du corps */
+.snake.horizontal {
+    background-image: url('../../../assets/snake-body.png');
+    transform: rotate(90deg);
+}
+
+.snake.vertical {
+    background-image: url('../../../assets/snake-body.png');
+}
+
+/* Styles pour les coins du corps */
+.snake.corner {
+    background-image: url('../../../assets/snake-turn.png');
+}
+
+.snake.corner-top-left {
+    transform: rotate(0deg);
+}
+
+.snake.corner-top-right {
+    transform: rotate(90deg);
+}
+
+.snake.corner-bottom-right {
+    transform: rotate(180deg);
+}
+
+.snake.corner-bottom-left {
+    transform: rotate(270deg);
+}
+
+/* Ajout de styles pour les boutons du jeu */
+/* Styles pour les contrôles et boutons */
+.game-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 440px;
+}
+
+.game-button {
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.game-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+.game-button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
+}
+
+.stop-button {
+    background-color: #f39c12;
+}
+
+.stop-button:hover {
+    background-color: #d35400;
+}
+
+.step-mode-button {
+    background-color: #FF774D;
+    color: white;
+  }
+
+.step-mode-button:hover {
+    background-color: #FF5733;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
+}
+  
+.next-step-button {
+  background-color: #FF774D;
+  color: white;
+}
+
+.next-step-button:hover {
+    background-color: #FF5733;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.button-disabled {
+    background-color: #95a5a6;
+    color: #ecf0f1;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.button-disabled:hover {
+    transform: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    background-color: #95a5a6;
+}
+
+.game-over {
+    font-size: 28px;
+    font-weight: bold;
+    color: #e74c3c;
+    margin: 10px 0;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: 2px;
+}
+
+.score {
+    font-size: 20px;
+    font-weight: bold;
+    color: #27ae60;
+    margin: 15px 0;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+
+/* Ajoutez ce style pour l'overlay Game Over */
+.game-over-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #e74c3c;
+    font-size: 36px;
+    font-weight: bold;
+    z-index: 10;
+    border-radius: 8px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+}
+
+/* Assurez-vous que le board a une position relative pour que l'overlay fonctionne correctement */
+/* Suppression de la première définition du board et conservation uniquement de la version avec position: relative */
+
+.loading-screen {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 400px;
+    gap: 2px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 15px 0;
+}
+
+/* Amélioration de l'overlay Game Over pour le rendre plus visible */
+.game-over-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #e74c3c;
+    font-size: 42px;
+    font-weight: bold;
+    z-index: 10;
+    border-radius: 8px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 3px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Ajout du style pour la zone score-controls */
+.score-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 440px;
+    margin: 15px 0;
+}
+
+.score {
+    font-size: 20px;
+    font-weight: bold;
+    color: #27ae60;
+    margin: 0;
+    text-align: left;
+    letter-spacing: 1px;
+}
+
+.step-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 440px;
+    margin: 10px 0;
+}
+
+.step-info p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #27ae60;
+    margin: 0;
+    text-align: left;
+    letter-spacing: 1px;
+}
+
+/* Ajustement pour que le bouton restart soit centré dans game-controls */
+/* Suppression des styles spécifiques au bouton restart */
+.restart-button {
+    background-color: #e74c3c;
+}
+
+.restart-button:hover {
+    background-color: #c0392b;
+}
+
+/* Suppression de la classe game-controls qui n'est plus utilisée */
+.game-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 440px;
+}
+
+/* Speed Control Styles */
+.speed-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 0;
+    width: 100%;
+    max-width: 440px;
+}
+
+.speed-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #27ae60;
+    margin-bottom: 10px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.speed-slider {
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: #ddd;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    margin-bottom: 10px;
+}
+
+.speed-slider:hover {
+    opacity: 1;
+}
+
+.speed-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #27ae60;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+.speed-slider::-webkit-slider-thumb:hover {
+    background: #2ecc71;
+    transform: scale(1.1);
+}
+
+.speed-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #27ae60;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+.speed-slider::-moz-range-thumb:hover {
+    background: #2ecc71;
+    transform: scale(1.1);
+}
+
+.speed-slider:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.speed-slider:disabled::-webkit-slider-thumb {
+    background: #95a5a6;
+    cursor: not-allowed;
+}
+
+.speed-slider:disabled::-moz-range-thumb {
+    background: #95a5a6;
+    cursor: not-allowed;
+}
+
+.speed-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.speed-labels span {
+    font-weight: 500;
+}

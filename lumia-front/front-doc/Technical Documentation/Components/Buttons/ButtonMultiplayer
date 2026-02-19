@@ -1,0 +1,170 @@
+EN
+
+# **📄ButtonMultiplayer**
+
+## **🧩 Description**
+
+ButtonMultiplayer is an interactive React button that toggles access to **multiplayer mode**. The displayed text is automatically translated based on the selected language via the LangProvider context.
+
+---
+
+## **✅Props**
+
+| **Name** | **Type** | **Required** | **Description** |
+| --- | --- | --- | --- |
+| multiplayer | boolean | ✅ | Indicates if the button is active (true) or disabled (false) |
+| onClick | function | ✅ | Function executed when the button is clicked (if enabled) |
+
+---
+
+## **🌍Internationalization**
+
+- The button uses the useLang() context to detect the selected language.
+- The text "multiplayer" is fetched from TranslationsDictionary to enable multilingual display.
+
+```
+<p>{TranslationsDictionary[selectedLang]?.["multiplayer"]}</p>
+```
+
+---
+
+## **🎨Visual Behavior**
+
+- **Size**: 204px width, 40px height
+- **Background color**: purple #5328EA by default, black on hover (hover:bg-black)
+- **Text**: white, bold (font-[600]), custom font font-Gotham
+- **Rounded corners**: 12px radius
+- **Animation**: smooth transition with duration-300
+
+### **🔒 Disabled state (**
+
+### **multiplayer === false**
+
+### **)**
+
+- **Opacity**: reduced (opacity-50)
+- **Cursor**: not-allowed (cursor-not-allowed)
+- **Hover effect disabled**: stays purple
+- Button is grayed out and non-clickable (disabled)
+
+---
+
+## **💡Example Usage**
+
+```
+<ButtonMultiplayer
+  multiplayer={isMultiplayerEnabled}
+  onClick={() => console.log("Multiplayer mode selected")}
+/>
+```
+
+---
+
+## **🛠Dependencies**
+
+- React
+- useLang from LangProvider (language management)
+- TranslationsDictionary (multilingual dictionary)
+
+---
+
+## **📦Export**
+
+```
+export default ButtonMultiplayer;
+```
+
+---
+
+## **✨Suggested Improvements(optional)**
+
+- Make the label customizable via a prop (e.g., labelOverride)
+- Add a spinner or loading state if the button triggers network actions
+- Add props like aria-label for accessibility
+
+-------------------------
+
+FR
+
+# 📄 **ButtonMultiplayer**
+
+## Description
+
+`ButtonMultiplayer` est un bouton React interactif qui permet d’activer ou de désactiver l’accès au **mode multijoueur**. Le texte affiché est automatiquement traduit en fonction de la langue sélectionnée via le contexte `LangProvider`.
+
+---
+
+## ✅ **Props**
+
+| Nom | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `multiplayer` | `boolean` | Oui | Indique si le bouton est actif (`true`) ou désactivé (`false`). |
+| `onClick` | `function` | Oui | Fonction exécutée lors du clic sur le bouton (si activé). |
+
+---
+
+## 🌍 **Internationalisation**
+
+- Le bouton utilise le contexte `useLang()` pour détecter la langue choisie.
+- Le texte `"multiplayer"` est récupéré depuis `TranslationsDictionary`, permettant l'affichage multilingue.
+
+```jsx
+<p>{TranslationsDictionary[selectedLang]?.["multiplayer"]}</p>
+
+```
+
+---
+
+## 🎨 **Comportement visuel**
+
+- **Taille** : `204px` de largeur, `40px` de hauteur.
+- **Couleur de fond** : violet `#5328EA` par défaut, noir au survol (`hover:bg-black`).
+- **Texte** : blanc, gras (`font-[600]`), police personnalisée `font-Gotham`.
+- **Coins arrondis** : `12px`.
+- **Animation** : transition douce avec `duration-300`.
+
+### 🔒 État désactivé (`multiplayer === false`)
+
+- **Opacité** : réduite (`opacity-50`)
+- **Curseur** : interdit (`cursor-not-allowed`)
+- **Effet de survol désactivé** : reste violet
+- Le bouton est grisé et non cliquable (`disabled`)
+
+---
+
+## 🖼 Exemple d’utilisation
+
+```jsx
+<ButtonMultiplayer
+  multiplayer={isMultiplayerEnabled}
+  onClick={() => console.log("Multiplayer mode selected")}
+/>
+
+```
+
+---
+
+## 🛠 Dépendances
+
+- `React`
+- `useLang` depuis `LangProvider` (gestion de la langue)
+- `TranslationsDictionary` (dictionnaire multilingue)
+
+---
+
+## 📦 Export
+
+Le composant est exporté par défaut :
+
+```
+export default ButtonMultiplayer;
+
+```
+
+---
+
+## ✨ Suggestions d’amélioration (facultatif)
+
+- **Rendre le label personnalisable** via une prop (`labelOverride` ?).
+- Ajouter un **spinner** ou **état de chargement** si le bouton déclenche une action réseau.
+- Ajouter des props comme `aria-label` pour l’accessibilité.

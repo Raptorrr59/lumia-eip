@@ -1,0 +1,174 @@
+EN
+
+# **📄ButtonLeaderboard**
+
+## **🧩 Description**
+
+ButtonLeaderboard is an interactive button that displays a translated title (“leaderboard”) and a dynamic state icon (an upward or downward arrow) depending on whether the leaderboard is currently visible. It also shows a fixed numerical progress (2536 / 20000).
+
+---
+
+## **✅Props**
+
+| **Name** | **Type** | **Required** | **Description** |
+| --- | --- | --- | --- |
+| onClick | function | ✅ | Function called when the button is clicked |
+| showLeaderboard | boolean | ✅ | Determines whether the leaderboard is currently shown, to toggle the icon |
+
+---
+
+## **🌍Internationalization**
+
+- The component uses the **language context** via useLang() from LangProvider.
+- It retrieves the translation for "leaderboard" from the TranslationsDictionary.
+
+```
+<p>{TranslationsDictionary[selectedLang]?.["leaderboard"]}</p>
+```
+
+---
+
+## **🎨Visual Behavior**
+
+- **Size**: 300px x 40px
+- **Background**: white by default, turns black on hover (hover:bg-black)
+- **Text**: purple #5328EA, bold (font-[600]), custom font font-Gotham
+- **Border**: 2px thick, purple #5328EA, rounded corners 12px
+- **Layout**:
+    - Horizontal flex layout with space-between
+    - Icon on the left (ChevronUpIcon or ChevronDownIcon)
+    - Centered label
+    - Fixed progress value "2536 / 20000" on the right
+
+---
+
+## **🖼Icons Used**
+
+- ChevronUpIcon / ChevronDownIcon from lucide-react
+    - Displayed based on the showLeaderboard state
+
+---
+
+## **💡Example Usage**
+
+```
+<ButtonLeaderboard
+  onClick={() => setShowLeaderboard(prev => !prev)}
+  showLeaderboard={showLeaderboard}
+/>
+```
+
+---
+
+## **🛠Dependencies**
+
+- React
+- lucide-react for icons
+- useLang and TranslationsDictionary for language support
+
+---
+
+## **📦Export**
+
+```
+export default ButtonLeaderboard;
+```
+
+---
+
+## **🔍Optional Improvements**
+
+- Make the "2536 / 20000" value dynamic or pass it via a prop
+- Add aria-label or role="button" for better accessibility
+- Allow color/theme customization via props (e.g. variant, theme)
+
+--------------------------
+
+FR
+
+# 📄 **ButtonLeaderboard**
+
+## Description
+
+`ButtonLeaderboard` est un bouton interactif qui affiche un titre traduit ("leaderboard") et un état dynamique (flèche vers le haut ou le bas) selon si le leaderboard est affiché ou non. Il montre également une progression numérique (fixée ici à `2536 / 20000`).
+
+---
+
+## ✅ **Props**
+
+| Nom | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `onClick` | `function` | Oui | Fonction appelée lorsque le bouton est cliqué. |
+| `showLeaderboard` | `boolean` | Oui | Détermine si le leaderboard est visible, pour afficher la bonne icône. |
+
+---
+
+## 🌍 **Internationalisation**
+
+- Le composant utilise le **contexte linguistique** via `useLang()` (issu de `LangProvider`).
+- Il récupère la traduction du mot `"leaderboard"` dans le dictionnaire `TranslationsDictionary`.
+
+```
+<p>{TranslationsDictionary[selectedLang]?.["leaderboard"]}</p>
+
+```
+
+---
+
+## 🎨 **Comportement visuel**
+
+- **Taille** : `300px x 40px`
+- **Couleur de fond** : blanche par défaut, noire au survol (`hover:bg-black`)
+- **Texte** : violet `#5328EA`, gras (`font-[600]`), police personnalisée `font-Gotham`
+- **Bordure** : épaisseur `2px`, couleur `#5328EA`, coins arrondis `12px`
+- **Disposition** :
+    - Flex container, alignement horizontal avec `space-between`
+    - Icône à gauche (`ChevronUpIcon` ou `ChevronDownIcon`)
+    - Texte centré
+    - Statistiques fixes alignées à droite : `"2536 / 20000"`
+
+---
+
+## 🖼 Icônes utilisées
+
+- `ChevronUpIcon` / `ChevronDownIcon` (importés depuis `lucide-react`)
+    - Affichés selon l’état `showLeaderboard`
+
+---
+
+## 🔁 Exemple d’utilisation
+
+```jsx
+<ButtonLeaderboard
+  onClick={() => setShowLeaderboard(prev => !prev)}
+  showLeaderboard={showLeaderboard}
+/>
+
+```
+
+---
+
+## 🛠 Dépendances
+
+- `React`
+- `lucide-react` pour les icônes
+- `useLang` et `TranslationsDictionary` pour la gestion des langues
+
+---
+
+## 📦 Export
+
+Exporté par défaut :
+
+```
+export default ButtonLeaderboard;
+
+```
+
+---
+
+## 🔍 À améliorer (facultatif)
+
+- Extraire la valeur `"2536 / 20000"` en prop ou la rendre dynamique.
+- Ajouter un `aria-label` ou `role="button"` pour l’accessibilité.
+- Permettre des couleurs alternatives ou thèmes via props (`variant`, `theme`).
