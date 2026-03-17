@@ -1,143 +1,59 @@
-# Clustermanager Documentation
+# Lumia Cluster Manager
 
-This directory orchestrates the management, training, and deployment of AI scripts and Docker containers for the Lumia platform. It includes API endpoints, file monitoring, Docker management, logging, and training automation.
+The **Cluster Manager** is the execution engine of the Lumia platform. It orchestrates the secure, isolated execution of user-submitted AI scripts using Docker. It serves as the bridge between the main Java backend and the sandboxed environments where AI models are trained and evaluated against game engines.
 
----
+## 🌟 Architecture & Capabilities
 
-## Table of Contents
-- [Overview](#overview)
-- [Key Components](#key-components)
-  - [API.py](#apipy)
-  - [AI.py](#aipy)
-  - [Lumia.sh](#lumiash)
-  - [DeliveringQueue/](#deliveringqueue)
-  - [AI-Vault/](#ai-vault)
-  - [train/](#train)
-  - [logs/](#logs)
-  - [build/ and Build-AI/](#build-and-build-ai)
-- [Setup & Usage](#setup--usage)
-- [Environment Variables](#environment-variables)
-- [Docker & Deployment](#docker--deployment)
-- [Notes](#notes)
+Built primarily in **Python** using **FastAPI**, the Cluster Manager provides a highly concurrent, robust environment orchestration system.
 
----
+- **Docker-in-Docker Orchestration**: Dynamically spins up, monitors, and tears down Docker containers for individual user sessions. Every AI script runs in an isolated container to ensure security and prevent resource hogging.
+- **File & Event Monitoring**: Uses background threads to monitor directories for new AI uploads, configuration changes, and generated logs.
+- **Automated Training Pipeline**: Manages the complete lifecycle of a training job, from receiving the dataset to notifying the backend when the PyTorch model (`.pt`) is fully trained and ready for download.
+- **Real-time Log Forwarding**: Scans game logs in real-time and forwards them to the backend, enabling the frontend to display live feedback to the user.
 
-## Overview
+## ⚙️ Key Components
 
-The `clustermanager` folder is the backend and orchestration layer for running, training, and managing user-submitted AI scripts in isolated Docker containers. It provides:
-- A FastAPI-based API for managing Docker containers and file uploads.
-- Automated file monitoring and environment configuration.
-- Training and log management.
-- Integration with the main Java backend and the front-end.
+- **`API.py`**: The core FastAPI server. It exposes endpoints (`/api/rundocker`, `/api/delete/docker`, etc.) that the Java backend calls to manage the execution lifecycle.
+- **`DeliveringQueue/`**: The staging area. It contains `file_monitor.py` (watches for new scripts), base Dockerfiles for different games, and `manage_user.py` which provisions isolated workspace directories (`1/`, `2/`, etc.) for active containers.
+- **`Game-Vault/`**: Contains the authoritative server-side game logic (Connect4, Snake, ImageRecognition) that user AIs will connect to and play against.
+- **`train/` & `logs/`**: Dedicated managers (`pt_manager.py`, `log_manager.py`) that handle the outbound flow of data back to the Java backend.
+- **`Lumia.sh`**: The master initialization script that sets up permissions, builds base Docker images, and launches the API.
 
----
+## 🚀 Setup & Execution
 
-## Key Components
+*Note: The Cluster Manager is designed to run on a Linux environment with Docker installed. It requires elevated privileges to manage containers.*
 
-### API.py
-- **Purpose:** Main FastAPI server for orchestrating Docker containers, handling file uploads, and communicating with the Java backend.
-- **Endpoints:**
-  - `/api/rundocker`: Launches a Docker container for a user’s AI script.
-  - `/api/delete/docker`: Stops and removes a Docker container.
-  - `/api/game_data`: Receives and forwards game log data.
-  - `/api/training_finished`: Notifies backend when training is complete.
-  - `/api/getfile`: Allows backend to download trained model files.
-  - `/api/restartdocker`: Restarts a Docker container for a user.
-- **Other:** Launches file/log/train managers as background threads.
+### Prerequisites
+- Python 3.8+
+- Docker & Docker Compose
+- `sudo` privileges
 
-### AI.py
-- **Purpose:** Example AI script that reads from a named pipe (FIFO) and prints received data. Used for testing or as a template.
+### Installation
 
-### Lumia.sh
-- **Purpose:** Shell script to build and start Docker containers and run the API server with appropriate permissions.
-- **Usage:**  
-  ```bash
-  ./Lumia.sh
-  ```
-
-### DeliveringQueue/
-- **Purpose:** Core folder for managing user AI scripts, Docker orchestration, and file monitoring.
-- **Key files:**
-  - `file_monitor.py`: Watches for new AI scripts, updates environment files, and restarts Docker Compose as needed.
-  - `manage_user.py`: Handles creation and deletion of user directories and associated files.
-  - `controller.py`: (If present) Additional orchestration logic.
-  - `docker-compose-app.yml`, `Dockerfile`: Docker Compose and build configuration.
-  - `init_train.sh`, `launch.sh`: Helper scripts for training and launching containers.
-  - `Game-Vault/`: Contains game logic scripts (e.g., Snake, Connect4, ImageRecognition).
-  - `include/`: Requirements and configuration files.
-- **Subfolders:**  
-  - `1/`, `2/`, `3/`: Per-user or per-session directories for running containers.
-
-### AI-Vault/
-- **Purpose:** Stores persistent copies of user AI scripts and configuration files, organized by user/session.
-
-### train/
-- **Purpose:** Manages training jobs and notifies the backend when training is complete.
-- **Key file:**  
-  - `pt_manager.py`: Watches for new/updated model files and notifies the backend.
-
-### logs/
-- **Purpose:** Handles log files and forwards them to the backend.
-- **Key file:**  
-  - `log_manager.py`: Scans for new log files, sends them to the backend, and deletes them after successful upload.
-
-### build/ and Build-AI/
-- **Purpose:** Build artifacts and additional Docker build scripts/configs.
-
----
-
-## Setup & Usage
-
-1. **Install Python dependencies:**  
+1. Install required Python dependencies:
    ```bash
    pip install -r DeliveringQueue/include/base-requirements.txt
    ```
+2. (Optional) Configure the environment variables. The system will auto-generate `.env` files in `DeliveringQueue/` dynamically, but you can set base paths if necessary.
 
-2. **Set up environment variables:**  
-   - Create a `.env` file in `DeliveringQueue/` (see below).
+### Launching the Manager
 
-3. **Build and start Docker containers:**  
-   ```bash
-   ./Lumia.sh
-   ```
-   Or manually:
-   ```bash
-   docker-compose build
-   docker-compose up
-   ```
+The easiest way to start the Cluster Manager is via the provided shell script:
 
-4. **Run the API server:**  
-   ```bash
-   sudo python3 API.py
-   ```
-
----
-
-## Environment Variables
-
-Example `.env` for DeliveringQueue:
+```bash
+./Lumia.sh
 ```
-WORKDIR_PATH=/1/snake
-PORT=5001
-GAME_PATH=/Game-Vault/snake.py
+
+This script will:
+1. Build the necessary Docker images based on the files in `Build-AI/`.
+2. Apply necessary permissions.
+3. Start the FastAPI server on port `5001`.
+
+Alternatively, you can manually run the API:
+```bash
+sudo python3 API.py
 ```
-These are updated automatically by the file monitor as new scripts are detected.
 
----
+## 🔒 Security & Sandboxing
 
-## Docker & Deployment
-
-- **Docker Compose** is used to manage isolated environments for each user’s AI script.
-- The system supports running multiple containers simultaneously for different users/games.
-- Ensure Docker and Docker Compose are installed and configured.
-
----
-
-## Notes
-
-- **Volume Paths:** You may need to adjust volume paths in Dockerfiles and docker-compose files to match your system.
-- **Permissions:** The API server may require `sudo` for certain operations (see `Lumia.sh`).
-- **Front-end Integration:** The front-end uploads AI scripts to the `/upload` route, which are then processed and run in containers.
-- **Extensibility:** Add new games by placing their scripts in `Game-Vault/` and updating relevant enums/configs.
-
----.
+User scripts are executed inside Docker containers strictly separated from the host. Network access is restricted to communicating with the local game server socket, and resource limits can be enforced via the `docker-compose-app.yml` templates inside the `DeliveringQueue`.

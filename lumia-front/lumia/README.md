@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# Lumia Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the **Lumia Frontend**! This is the user-facing web application for the Lumia AI platform. It provides a sleek, modern, and highly interactive interface where developers can manage their AI models, track training progress, and review game performance.
 
-## Available Scripts
+## 🌟 Features & UI Highlights
 
-In the project directory, you can run:
+- **Modern Tech Stack**: Built with **React 18** and bootstrapped via Create React App.
+- **Rich Styling & Animations**: 
+  - **TailwindCSS** for rapid, utility-first UI styling.
+  - **Material UI (@mui/material)** for accessible, pre-built high-quality components.
+  - **Framer Motion** for fluid, engaging page transitions and element animations.
+- **Real-time Communication**: Utilizes `sockjs-client` and `@stomp/stompjs` for real-time WebSocket communication, allowing users to watch game logs and training statuses update live without refreshing.
+- **Interactive Elements**: Features dynamic chat elements (`react-chat-elements`), interactive icons (`lucide-react`), and embedded media (`react-youtube`).
+- **Robust Routing**: Client-side routing managed by `react-router-dom` for a seamless Single Page Application (SPA) experience.
 
-### `npm start`
+## 🚀 Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+If you want to run the frontend independently of the root Docker Compose setup:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
+- Node.js (v18+ recommended)
+- npm or yarn
 
-### `npm test`
+### Installation
+Navigate to the `lumia` directory and install the dependencies:
+```bash
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Configuration
+By default, the development server proxies API requests to `http://localhost:8000` (the Spring Boot backend). If your backend is running on a different port, update the `"proxy"` field in `package.json` or use environment variables.
 
-### `npm run build`
+### Running the App
+Start the development server:
+```bash
+npm start
+```
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser. The page will reload when you make changes.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Building for Production
+To bundle the app into static files for production:
+```bash
+npm run build
+```
+This optimizes the build for the best performance and outputs the files to the `build` folder.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🧪 Testing
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The project is configured with Jest for unit testing and Cypress for End-to-End (E2E) testing.
 
-### `npm run eject`
+- **Run unit tests**:
+  ```bash
+  npm test
+  ```
+- **Open Cypress UI**:
+  ```bash
+  npm run cypress:open
+  ```
+- **Run E2E tests headless**:
+  ```bash
+  npm run test:e2e
+  ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🏗️ Project Structure
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `src/components`: Reusable UI components (buttons, modals, charts).
+- `src/pages`: Top-level page components corresponding to different routes.
+- `src/contexts`: React contexts for state management (e.g., Auth context).
+- `src/utils`: Helper functions and API wrappers.
+- `public`: Static assets, including the downloadable training packages (`tp-connect-four.zip`, etc.).
